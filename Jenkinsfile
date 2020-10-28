@@ -4,10 +4,10 @@
 pipeline {
   agent any
   environment {
-    AWS_ACCOUNT_ID = 'Your AWS Account ID'
-    AWS_REGION = 'Region you used for this project'
-    AWS_CA_DOMAIN = 'Name of your CodeArtifact domain'
-    AWS_CA_REPO = 'Name of your CodeArtifact repository'
+    AWS_ACCOUNT_ID = '583353701554'
+    AWS_REGION = 'us-east-1'
+    AWS_CA_DOMAIN = 'codeartifact-vinod-repo'
+    AWS_CA_REPO = 'my-repo'
     AWS_STACK_NAME = 'Name of the CloudFormation stack'
     CONTAINER_NAME = 'Container name provided to CloudFormation'
     CREDENTIALS_ID = 'Jenkins credentials ID' 
