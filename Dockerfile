@@ -3,6 +3,11 @@
 
 FROM python:3.7
 
+USER root
+RUN curl -O https://bootstrap.pypa.io/get-pip.py \
+&& python get-pip.py \
+&& pip install awscli
+
 # Retrieve the arguments passed from the docker build command
 ARG CODEARTIFACT_TOKEN
 ARG DOMAIN
