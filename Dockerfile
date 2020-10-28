@@ -8,6 +8,8 @@ RUN curl -O https://bootstrap.pypa.io/get-pip.py \
 && python get-pip.py \
 && pip install awscli
 
+RUN aws --version
+
 # Retrieve the arguments passed from the docker build command
 ARG CODEARTIFACT_TOKEN
 ARG DOMAIN
