@@ -8,9 +8,9 @@ pipeline {
     AWS_REGION = 'us-east-1'
     AWS_CA_DOMAIN = 'codeartifact-vinod-repo'
     AWS_CA_REPO = 'my-repo'
-    AWS_STACK_NAME = 'Name of the CloudFormation stack'
-    CONTAINER_NAME = 'Container name provided to CloudFormation'
-    CREDENTIALS_ID = 'Jenkins credentials ID' 
+    AWS_STACK_NAME = 'Consumer'
+    CONTAINER_NAME = 'application'
+    CREDENTIALS_ID = 'code-artifact' 
   }
   stages {
 
