@@ -52,7 +52,7 @@ pipeline {
             --build-arg CODEARTIFACT_TOKEN='$authToken' \
             --build-arg DOMAIN=$AWS_CA_DOMAIN-$AWS_ACCOUNT_ID \
             --build-arg REGION=$AWS_REGION \
-            --build-arg access_key=$Access_key
+            --build-arg access_key=$Access_key \
             --build-arg REPO=$AWS_CA_REPO .
           """)
 
