@@ -22,7 +22,7 @@ ARG DOMAIN
 ARG REGION
 ARG REPO
 
-COPY . /
+copy /root/.aws /root/.aws
 
 #Manually configure the PIP client with the authenthication token
 RUN pip config set global.index-url "https://aws:$CODEARTIFACT_TOKEN@$DOMAIN.d.codeartifact.$REGION.amazonaws.com/pypi/$REPO/simple/"
