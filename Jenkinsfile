@@ -11,7 +11,7 @@ pipeline {
     AWS_STACK_NAME = 'Consumer'
     CONTAINER_NAME = 'application'
     CREDENTIALS_ID = 'code-artifact' 
-    Access_key     = credentials('AWS_ACCESS_KEY')
+    
   }
   stages {
 
