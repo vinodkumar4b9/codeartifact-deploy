@@ -3,12 +3,18 @@
 
 FROM python:3.7
 
+ARG access_key
+
 USER root
 RUN curl -O https://bootstrap.pypa.io/get-pip.py \
 && python get-pip.py \
 && pip install awscli
 
 RUN aws --version
+
+RUN echo $access_key
+
+
 
 # Retrieve the arguments passed from the docker build command
 ARG CODEARTIFACT_TOKEN
