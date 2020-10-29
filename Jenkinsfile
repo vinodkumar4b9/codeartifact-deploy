@@ -11,6 +11,7 @@ pipeline {
     AWS_STACK_NAME = 'Consumer'
     CONTAINER_NAME = 'application'
     CREDENTIALS_ID = 'code-artifact' 
+    Access_key     = credentials('AWS_ACCESS_KEY')
   }
   stages {
 
@@ -51,6 +52,7 @@ pipeline {
             --build-arg CODEARTIFACT_TOKEN='$authToken' \
             --build-arg DOMAIN=$AWS_CA_DOMAIN-$AWS_ACCOUNT_ID \
             --build-arg REGION=$AWS_REGION \
+            --build-arg access_key=$Access_key
             --build-arg REPO=$AWS_CA_REPO .
           """)
 
