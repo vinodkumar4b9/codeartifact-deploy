@@ -73,47 +73,47 @@ pipeline {
       }
     }
 
-    stage('Publish to ECR') {
-      steps {
-        script {
-          withCredentials([usernamePassword(
-            credentialsId: CREDENTIALS_ID,
-            passwordVariable: 'AWS_SECRET_ACCESS_KEY',
-            usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
+    // stage('Publish to ECR') {
+    //   steps {
+    //     script {
+    //       withCredentials([usernamePassword(
+    //         credentialsId: CREDENTIALS_ID,
+    //         passwordVariable: 'AWS_SECRET_ACCESS_KEY',
+    //         usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
 
-              docker.withRegistry('https://${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com') {
-                //Retrieve the Amazon ECR authenthication token, and use it to configure the Docker daemon
-                sh """
-                  aws ecr get-login-password \
-                  | docker login \
-                  --username AWS \
-                  --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
-                  """
+    //           docker.withRegistry('https://${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com') {
+    //             //Retrieve the Amazon ECR authenthication token, and use it to configure the Docker daemon
+    //             sh """
+    //               aws ecr get-login-password \
+    //               | docker login \
+    //               --username AWS \
+    //               --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
+    //               """
 
-                  //Push image to ECR
-                  docker.image("$CONTAINER_NAME:$BUILD_ID").push()
-              }
-          }
-        }
-      }
-    }
+    //               //Push image to ECR
+    //               docker.image("$CONTAINER_NAME:$BUILD_ID").push()
+    //           }
+    //       }
+    //     }
+    //   }
+    // }
 
-    stage('Deploy to ECS') {
-      steps {
-        script {
-          //Update CloudFormation template with the new image tag. This will cause CloudFormation to start a new deployment to ECS
-          withCredentials([usernamePassword(
-            credentialsId: CREDENTIALS_ID,
-            passwordVariable: 'AWS_SECRET_ACCESS_KEY',
-            usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
-              sh "aws cloudformation deploy \
-              --stack-name $AWS_STACK_NAME \
-              --template-file application.yml \
-              --parameter-overrides ImageTag=$BUILD_ID \
-              --capabilities CAPABILITY_NAMED_IAM"
-          }
-        }
-      }
-    }
-  }
+    // stage('Deploy to ECS') {
+    //   steps {
+    //     script {
+    //       //Update CloudFormation template with the new image tag. This will cause CloudFormation to start a new deployment to ECS
+    //       withCredentials([usernamePassword(
+    //         credentialsId: CREDENTIALS_ID,
+    //         passwordVariable: 'AWS_SECRET_ACCESS_KEY',
+    //         usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
+    //           sh "aws cloudformation deploy \
+    //           --stack-name $AWS_STACK_NAME \
+    //           --template-file application.yml \
+    //           --parameter-overrides ImageTag=$BUILD_ID \
+    //           --capabilities CAPABILITY_NAMED_IAM"
+    //       }
+    //     }
+    //   }
+    // }
+ // }
 }
